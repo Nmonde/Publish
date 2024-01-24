@@ -1,13 +1,13 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import WelcomePage from './components/WelcomePage';
-import LoginForm from './components/LoginForm';
+import ContentPage from './components/ContentPage';
 
 const App = () => {
   return (
     <Routes>
-        <Route exact path="/" element={<WelcomePage />} />
-        <Route path="/login" element={<LoginForm/>}/>
+      <Route exact path="/" element={<WelcomePage />} />
+      <Route path="/content" element={<ContentPage />} />
     </Routes>
   );
 };

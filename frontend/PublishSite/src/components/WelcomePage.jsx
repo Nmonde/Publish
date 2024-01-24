@@ -1,12 +1,26 @@
 import React, { useState } from 'react';
 import './styles/WelcomePage.css';
+import { Link, useNavigate } from 'react-router-dom';
+// import { User } from '../../../../backend/db/userModel';
+import axios from 'axios';
 
 const WelcomePage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
-  const handleLogin = () => {
-    console.log(`Login: Username - ${username}, Password - ${password}`);
+  const handleRegister = async () => {
+    try {
+      await axios.post('http://localhost:3000/users/register', { username, password });
+ 
+      // Clear input fields after successful registration
+ setUsername('');
+ setPassword('');
+      // Navigate to the new page after successful registration
+      navigate('/content');
+    } catch (error) {
+      console.error('Error registering user:', error);
+    }
   };
 
   return (
@@ -34,11 +48,12 @@ const WelcomePage = () => {
             />
           </label>
           <br />
-          <button type="button" onClick={handleLogin} className="button">
-            Login
+          <button type="button" onClick={handleRegister} className="button">
+            Register
           </button>
         </form>
       </div>
+
     </div>
   );
 };
